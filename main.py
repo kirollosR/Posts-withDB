@@ -2,13 +2,14 @@
 
 from fastapi import FastAPI
 from database import engine, SessionLocal
-from routers import users
+from routers import users, posts
 
 from models import user_model, post_model
 
 app = FastAPI()
 
 app.include_router(users.router)
+app.include_router(posts.router)
 
 # Create the database tables
 models = [user_model, post_model]
