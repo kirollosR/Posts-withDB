@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-import models
-import schemas
+from models import user_model as models
+from schemas import user_schema
 
 
 def get_user(db: Session, user_id: int):
@@ -12,7 +12,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate):
+def create_user(db: Session, user: user_schema.UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"
     db_user = models.User(username=user.username, hashed_password=fake_hashed_password)
     db.add(db_user)
